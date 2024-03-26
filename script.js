@@ -5,24 +5,28 @@ document.addEventListener("DOMContentLoaded", function() {
     var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     dateElement.textContent = today.toLocaleDateString('en-US', options);
 
-    // Add event listener to the button
-    var getPassageBtn = document.getElementById("get-passage-btn");
-    getPassageBtn.addEventListener("click", function() {
-        var chapterInput = document.getElementById("chapter-input").value;
-        if (chapterInput.trim() !== "") {
-            fetchPassage("custom-verse", chapterInput);
-        }
+    // Add event listeners to the buttons
+    var customSections = document.querySelectorAll(".custom-section");
+    customSections.forEach(function(section) {
+        var getPassageBtn = section.querySelector(".get-passage-btn");
+        var chapterInput = section.querySelector(".chapter-input");
+        getPassageBtn.addEventListener("click", function() {
+            var sectionId = section.querySelector(".custom-verse").id;
+            var chapterInputValue = chapterInput.value.trim();
+            if (chapterInputValue !== "") {
+                fetchPassage(sectionId, chapterInputValue);
+            }
+        });
     });
 
     // Fetch Bible passages for predefined sections
-    fetchPassage("reading1", "Genesis 1:14-15");
-    fetchPassage("reading2", "John 1:1-12");
-    fetchPassage("gospel", "Matthew 1:1-15");
+    fetchPassage("reading1-verse", "Genesis 1:1-5");
+    fetchPassage("reading2-verse", "John 1:1-5");
+    fetchPassage("gospel-verse", "Matthew 1:1-5");
 
     function fetchPassage(sectionId, reference) {
         var [book, verses] = reference.split(" ");
-        var [startVerse, endVerse] = verses.split("-");
-        var passageReference = `${book} ${startVerse}-${endVerse}`;
+        var passageReference = `${book} ${verses}`;
         fetch(`https://api.esv.org/v3/passage/text/?q=${passageReference}&include-footnotes=false&include-headings=false&include-subheadings=false`, {
             headers: {
                 'Authorization': 'Token 01a9aa6f7e9b069816d8f6a6f999c7fdca033478' // Replace YOUR_API_KEY with your actual ESV API key
