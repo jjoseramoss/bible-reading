@@ -1,8 +1,37 @@
 <!DOCTYPE html>
-    <head>
-            <title>Daily Bible Reading!</title>
-    </head>
-    <body>
-        <h1 style="color: black">Daily Bible Reading</h1>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Bible Reading</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Daily Bible Reading</h1>
+        <div id="date"></div>
+    </header>
+    <main>
+        <div id="custom-section">
+            <input type="text" id="chapter-input" placeholder="Enter chapter and verse range (e.g., Genesis 1:12-15)">
+            <button id="get-passage-btn">Get Passage</button>
+            <section id="custom-verse">
+                <!-- Custom passage will be displayed here -->
+            </section>
+        </div>
+        <section id="reading1">
+            <h2>Reading 1</h2>
+            <div id="reading1-verse"></div>
+        </section>
+        <section id="reading2">
+            <h2>Reading 2</h2>
+            <div id="reading2-verse"></div>
+        </section>
+        <section id="gospel">
+            <h2>Gospel</h2>
+            <div id="gospel-verse"></div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
 </html>
